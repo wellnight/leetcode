@@ -15,8 +15,10 @@ function slidingWindow($str, $target)
     for ($i = 0; $i < $targetLength; $i++) {
         $targetHash[$target[$i]]++;
     }
-
+    $charNum = count($targetHash);
+    $start = 0;
     $match = 0;
+    $start = 0;
     $left = $right = 0;
     $minLength = PHP_INT_MAX;
     $length = strlen($str);
@@ -26,8 +28,9 @@ function slidingWindow($str, $target)
             $match++;
         }
         $right++;
-        while ($match == $targetLength) {
+        while ($match == $charNum) {
             if ($minLength > $right - $left) {
+                $start = $left;
                 $minLength = $right - $left;
             }
             $windowHash[$str[$left]]--;
@@ -37,7 +40,7 @@ function slidingWindow($str, $target)
             $left++;
         }
     }
-    return $minLength != PHP_INT_MAX ? substr($str, $left - 1, $minLength) : "";
+    return $minLength != PHP_INT_MAX ? substr($str, $start, $minLength) : "";
 }
 
 //给定一个字符串 s 和一个非空字符串 p，找到 s 中所有是 p 的字母异位词的子串，返回这些子串的起始索引。
@@ -50,22 +53,6 @@ function slidingWindow($str, $target)
 //s: "cbaebabacd" p: "abc"
 //输出:
 //[0, 6]
-//解释:
-//起始索引等于 0 的子串是 "cba", 它是 "abc" 的字母异位词。
-//起始索引等于 6 的子串是 "bac", 它是 "abc" 的字母异位词。
-// 示例 2:
-//输入:
-//s: "abab" p: "ab"
-//
-//输出:
-//[0, 1, 2]
-//
-//解释:
-//起始索引等于 0 的子串是 "ab", 它是 "ab" 的字母异位词。
-//起始索引等于 1 的子串是 "ba", 它是 "ab" 的字母异位词。
-//起始索引等于 2 的子串是 "ab", 它是 "ab" 的字母异位词。
-//
-//
 //$str = "cbaebabacd";$target="abc";
 //var_dump(slidingWindow1($str,$target));
 function slidingWindow1($str, $target)
@@ -81,6 +68,7 @@ function slidingWindow1($str, $target)
         $targetHash[$target[$i]]++;
     }
 
+    $charNum = count($targetHash);
     $match = 0;
     $left = $right = 0;
     $results = [];
@@ -91,7 +79,7 @@ function slidingWindow1($str, $target)
             $match++;
         }
         $right++;
-        while ($match == $targetLength) {
+        while ($match == $charNum) {
             if ($targetLength == $right - $left) {
                 $results[] = $left;
             }
