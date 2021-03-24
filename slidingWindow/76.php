@@ -21,8 +21,8 @@ class Solution
 
         $left = $right = 0;
 
-        $targetLength = strLen($target);
-        $sourceLength = strLen($source);
+        $targetLength = strlen($target);
+        $sourceLength = strlen($source);
 
         $match = 0;
         $start = 0;
@@ -66,8 +66,8 @@ class Solution
 
         $left = $right = 0;
 
-        $targetLength = strLen($target);
-        $sourceLength = strLen($source);
+        $targetLength = strlen($target);
+        $sourceLength = strlen($source);
 
         $match = 0;
         $start = 0;
